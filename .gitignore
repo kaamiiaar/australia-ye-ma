@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# JavaScript tooling (for future iterations)
+node_modules/
+dist/
+coverage/
+.vite/
+
+# Logs and temporary files
+*.log
+tmp/
+.cache/
