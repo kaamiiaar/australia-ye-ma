@@ -13,6 +13,7 @@ Goal: test navigation, vocabulary, category priorities, visual tone, and the fir
 - Home discovery, search and category filters, saved items, submission entry point, and profile state.
 - Local mock data only; no accounts, payments, scraping, or persistent backend.
 - Working listing details with trust state, source/freshness context, saving, claim, and correction entry points.
+- A community directory prototype using public, link-only Telegram metadata with explicit non-endorsement and freshness labels.
 - Run locally with `python3 -m http.server 4173`.
 - Publish later as-is to GitHub Pages or load the HTTPS URL inside a Telegram Mini App.
 

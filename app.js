@@ -17,17 +17,25 @@ const listings = [
   { id: 5, type: 'events', logo: 'ش', fa: 'شب بازی و آشنایی', en: 'Games & Meetup Night', placeFa: 'پنجشنبه · برانزویک', placeEn: 'Thursday · Brunswick', verified: false },
 ];
 
+const communitySources = [
+  { id: 'melbourne_ir', icon: 'M', fa: 'ملبورن استرالیا', en: 'Melbourne Persian Community', topic: 'city', scope: 'melbourne', members: '≈ 7.4K', url: 'https://t.me/melbourne_ir', descriptionFa: 'گفت‌وگوی عمومی ایرانیان ملبورن و ویکتوریا', descriptionEn: 'Public discussion for Iranians in Melbourne and Victoria' },
+  { id: 'jobaustralia', icon: 'ک', fa: 'کاریابی استرالیا', en: 'Jobs Australia', topic: 'jobs', scope: 'australia', members: '≈ 12.2K', url: 'https://t.me/jobaustralia', descriptionFa: 'فرصت شغلی، رزومه، مصاحبه و تجربه کار', descriptionEn: 'Jobs, CVs, interviews and Australian work experience' },
+  { id: 'rent_australia', icon: 'خ', fa: 'اجاره خانه استرالیا', en: 'Rent Australia', topic: 'housing', scope: 'australia', members: '≈ 9.1K', url: 'https://t.me/rent_australia', descriptionFa: 'گفت‌وگو و آگهی‌های مرتبط با اجاره و هم‌خانه', descriptionEn: 'Discussion and posts about rentals and share houses' },
+  { id: 'studentsaustralia', icon: 'د', fa: 'دانشجویان استرالیا', en: 'Students Australia', topic: 'students', scope: 'australia', members: '≈ 5.7K', url: 'https://t.me/studentsaustralia', descriptionFa: 'جامعه دانشجویان و تجربه تحصیل در استرالیا', descriptionEn: 'Student community and studying in Australia' },
+  { id: 'travel_in_au', icon: 'گ', fa: 'استرالیا را باهم بگردیم', en: 'Explore Australia Together', topic: 'activities', scope: 'australia', members: '≈ 7.3K', url: 'https://t.me/travel_in_au', descriptionFa: 'سفر، طبیعت‌گردی و فعالیت‌های گروهی', descriptionEn: 'Travel, outdoors and group activities' },
+];
+
 const copy = {
   fa: {
-    greeting: 'سلام ملبورن 👋', hero: 'هر چیزی که برای زندگی اینجا نیاز داری', heroSub: 'کسب‌وکار، رویداد، کار و آدم‌های خودت را پیدا کن.', search: 'مثلاً دندانپزشک در ریچموند…', categories: 'دنبال چی می‌گردی؟', all: 'همه', seeAll: 'دیدن همه', featured: 'این هفته در ملبورن', nearby: 'پیشنهادهای نزدیک تو', fresh: 'تازه و منتخب', explore: 'جستجو', exploreSub: 'در میان خدمات، فرصت‌ها و جامعه فارسی‌زبان', saved: 'ذخیره‌ها', savedSub: 'چیزهایی که می‌خواهی دوباره ببینی', noSaved: 'هنوز چیزی ذخیره نکردی', noSavedText: 'قلب کنار هر مورد را بزن تا بعداً راحت پیدایش کنی.', submit: 'چی می‌خواهی اضافه کنی؟', submitSub: 'به کامل‌تر شدن جامعه کمک کن', profile: 'پروفایل من', profileSub: 'تنظیمات، فعالیت‌ها و اعتماد', prototype: 'محتوای این نسخه نمایشی و غیرواقعی است.', unverified: 'تأییدنشده', verified: 'تأییدشده', source: 'منبع عمومی', savedToast: 'به ذخیره‌ها اضافه شد', removedToast: 'از ذخیره‌ها حذف شد'
+    greeting: 'سلام ملبورن 👋', hero: 'هر چیزی که برای زندگی اینجا نیاز داری', heroSub: 'کسب‌وکار، رویداد، کار و آدم‌های خودت را پیدا کن.', search: 'مثلاً دندانپزشک در ریچموند…', categories: 'دنبال چی می‌گردی؟', all: 'همه', seeAll: 'دیدن همه', featured: 'این هفته در ملبورن', nearby: 'پیشنهادهای نزدیک تو', fresh: 'تازه و منتخب', explore: 'جستجو', exploreSub: 'در میان خدمات، فرصت‌ها و جامعه فارسی‌زبان', saved: 'ذخیره‌ها', savedSub: 'چیزهایی که می‌خواهی دوباره ببینی', noSaved: 'هنوز چیزی ذخیره نکردی', noSavedText: 'قلب کنار هر مورد را بزن تا بعداً راحت پیدایش کنی.', submit: 'چی می‌خواهی اضافه کنی؟', submitSub: 'به کامل‌تر شدن جامعه کمک کن', profile: 'پروفایل من', profileSub: 'تنظیمات، فعالیت‌ها و اعتماد', prototype: 'محتوای محصول نمایشی است؛ لینک‌های کامیونیتی از صفحات عمومی آمده‌اند.', unverified: 'تأییدنشده', verified: 'تأییدشده', source: 'منبع عمومی', savedToast: 'به ذخیره‌ها اضافه شد', removedToast: 'از ذخیره‌ها حذف شد'
   },
   en: {
-    greeting: 'Hello Melbourne 👋', hero: 'Everything you need for life here', heroSub: 'Find local businesses, events, work and your people.', search: 'Try “dentist in Richmond”…', categories: 'What are you looking for?', all: 'All', seeAll: 'See all', featured: 'This week in Melbourne', nearby: 'Recommended near you', fresh: 'Fresh and hand-picked', explore: 'Explore', exploreSub: 'Search Persian-friendly services, opportunities and communities', saved: 'Saved', savedSub: 'Things you want to find again', noSaved: 'Nothing saved yet', noSavedText: 'Tap the heart beside an item to keep it here.', submit: 'What would you like to add?', submitSub: 'Help make the community more useful', profile: 'My profile', profileSub: 'Settings, activity and trust', prototype: 'All prototype content is fictional.', unverified: 'Unverified', verified: 'Verified', source: 'Public source', savedToast: 'Added to saved', removedToast: 'Removed from saved'
+    greeting: 'Hello Melbourne 👋', hero: 'Everything you need for life here', heroSub: 'Find local businesses, events, work and your people.', search: 'Try “dentist in Richmond”…', categories: 'What are you looking for?', all: 'All', seeAll: 'See all', featured: 'This week in Melbourne', nearby: 'Recommended near you', fresh: 'Fresh and hand-picked', explore: 'Explore', exploreSub: 'Search Persian-friendly services, opportunities and communities', saved: 'Saved', savedSub: 'Things you want to find again', noSaved: 'Nothing saved yet', noSavedText: 'Tap the heart beside an item to keep it here.', submit: 'What would you like to add?', submitSub: 'Help make the community more useful', profile: 'My profile', profileSub: 'Settings, activity and trust', prototype: 'Product content is fictional; community links come from public pages.', unverified: 'Unverified', verified: 'Verified', source: 'Public source', savedToast: 'Added to saved', removedToast: 'Removed from saved'
   }
 };
 
 const storedSaved = JSON.parse(localStorage.getItem('australia-ye-ma-saved') || localStorage.getItem('melbourne-e-ma-saved') || localStorage.getItem('persian-connect-saved') || '[]');
-const state = { route: 'home', previousRoute: 'home', language: 'fa', filter: 'all', query: '', saved: new Set(storedSaved), selectedItem: 1 };
+const state = { route: 'home', previousRoute: 'home', language: 'fa', filter: 'all', communityFilter: 'all', query: '', saved: new Set(storedSaved), selectedItem: 1 };
 const app = document.querySelector('#app');
 const t = key => copy[state.language][key];
 const local = item => item[state.language];
@@ -49,6 +57,30 @@ function filteredListings() {
 
 function categoryGrid() {
   return `<div class="category-grid">${categories.map(c => `<button class="category" data-category="${c.id}"><span class="category-icon">${c.icon}</span><small>${local(c)}</small></button>`).join('')}</div>`;
+}
+
+function communityCard(item) {
+  const isFa = state.language === 'fa';
+  return `<article class="community-card">
+    <div class="community-top"><div class="community-logo">${item.icon}</div><div><span class="status">${isFa ? 'فقط پیوند عمومی' : 'Public link only'}</span><h2>${local(item)}</h2><p>${isFa ? item.descriptionFa : item.descriptionEn}</p></div></div>
+    <div class="community-facts"><span>${item.members} ${isFa ? 'عضو تقریبی' : 'approx. members'}</span><span>${item.scope === 'melbourne' ? (isFa ? 'ملبورن · ویکتوریا' : 'Melbourne · Victoria') : (isFa ? 'سراسر استرالیا' : 'Australia-wide')}</span><span>${isFa ? 'بررسی: ۱۱ شهریور ۱۴۰۵' : 'Checked: 2 Sep 2026'}</span></div>
+    <div class="community-footer"><small>${isFa ? 'تأییدنشده · بدون همکاری رسمی' : 'Unverified · no official partnership'}</small><a class="telegram-button" href="${item.url}" target="_blank" rel="noopener noreferrer">${isFa ? 'باز کردن در تلگرام' : 'Open in Telegram'} ↗</a></div>
+  </article>`;
+}
+
+function communities() {
+  const isFa = state.language === 'fa';
+  const filters = [
+    { id: 'all', fa: 'همه', en: 'All' }, { id: 'city', fa: 'ملبورن', en: 'Melbourne' },
+    { id: 'jobs', fa: 'کار', en: 'Jobs' }, { id: 'housing', fa: 'خانه', en: 'Housing' },
+    { id: 'students', fa: 'دانشجو', en: 'Students' }, { id: 'activities', fa: 'تفریح', en: 'Activities' }
+  ];
+  const results = communitySources.filter(item => state.communityFilter === 'all' || item.topic === state.communityFilter);
+  return `<div class="page-title"><h1>${isFa ? 'کامیونیتی‌ها' : 'Communities'}</h1><p>${isFa ? 'گروه مناسب را پیدا کن؛ گفت‌وگو همچنان در تلگرام ادامه دارد.' : 'Find the right group; conversation continues in Telegram.'}</p></div>
+    <div class="community-notice"><b>${isFa ? 'لینک، نه تأیید' : 'Linked, not endorsed'}</b><span>${isFa ? 'این گروه‌ها از صفحات عمومی پیدا شده‌اند و هنوز با استرالیای ما همکاری رسمی ندارند.' : 'These groups were found through public pages and are not yet official Australia-ye Ma partners.'}</span></div>
+    <div class="filter-row">${filters.map(filter => `<button class="filter-chip ${state.communityFilter === filter.id ? 'active' : ''}" data-community-filter="${filter.id}">${local(filter)}</button>`).join('')}</div>
+    <div class="community-stack">${results.map(communityCard).join('')}</div>
+    <button class="suggest-community" data-route="submit">＋ ${isFa ? 'معرفی یا مدیریت یک گروه' : 'Suggest or manage a community'}</button>`;
 }
 
 function home() {
@@ -100,9 +132,9 @@ function profile() {
 }
 
 function render() {
-  const views = { home, explore, saved, submit, profile, detail };
+  const views = { home, explore, communities, saved, submit, profile, detail };
   app.innerHTML = (views[state.route] || home)();
-  document.querySelectorAll('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.route === state.route));
+  document.querySelectorAll('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.route === state.route || (state.route === 'communities' && button.dataset.route === 'explore')));
   document.documentElement.lang = state.language;
   document.documentElement.dir = state.language === 'fa' ? 'rtl' : 'ltr';
   document.querySelector('#languageButton').textContent = state.language === 'fa' ? 'EN' : 'فا';
@@ -122,9 +154,11 @@ document.addEventListener('click', event => {
   const route = event.target.closest('[data-route]');
   if (route) { if (route.dataset.route !== 'detail') state.previousRoute = route.dataset.route; state.route = route.dataset.route; render(); app.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const category = event.target.closest('[data-category]');
-  if (category) { state.filter = category.dataset.category; state.route = 'explore'; render(); return; }
+  if (category) { state.filter = category.dataset.category; state.route = category.dataset.category === 'community' ? 'communities' : 'explore'; render(); return; }
   const filter = event.target.closest('[data-filter]');
   if (filter) { state.filter = filter.dataset.filter; render(); return; }
+  const communityFilter = event.target.closest('[data-community-filter]');
+  if (communityFilter) { state.communityFilter = communityFilter.dataset.communityFilter; render(); return; }
   const save = event.target.closest('[data-save]');
   if (save) { const id = Number(save.dataset.save); const adding = !state.saved.has(id); adding ? state.saved.add(id) : state.saved.delete(id); localStorage.setItem('australia-ye-ma-saved', JSON.stringify([...state.saved])); render(); showToast(adding ? t('savedToast') : t('removedToast')); return; }
   const listing = event.target.closest('[data-listing]');
