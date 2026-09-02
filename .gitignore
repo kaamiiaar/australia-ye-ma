@@ -15,6 +15,9 @@
 *.pem
 *.key
 
+# Private product research and internal backlog
+.private/
+
 # JavaScript tooling (for future iterations)
 node_modules/
 dist/

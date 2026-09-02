@@ -2,7 +2,9 @@
 
 ## Product context
 
-Australia-ye Ma (استرالیای ما) is a bilingual, trust-focused local discovery product for Persian-speaking people across Australia. Melbourne is the first launch city and appears in-product as Melbourne-e Ma (ملبورنِ ما). Read `VISION.md` and `TECHNICAL_PLAN.md` before making product or architecture changes.
+Australia-ye Ma (استرالیای ما) is a bilingual, trust-focused local discovery product for Persian-speaking people across Australia. Melbourne is the first launch city and appears in-product as Melbourne-e Ma (ملبورنِ ما). Read `VISION.md`, `TECHNICAL_PLAN.md`, and `.private/ideas-and-bugs.md` (when available locally) before making product or architecture changes. Treat the private ideas-and-bugs file as the shared lightweight backlog: add discoveries, unresolved product ideas, and reproducible bugs there as work progresses.
+
+Private Telegram community research lives under `.private/telegram/` when available locally. Keep observed facts separate from hypotheses and do not mark a source as reviewed without recording the review date. Never move invite links, private research, copied community material, or internal notes into tracked files.
 
 ## Current stage
 
