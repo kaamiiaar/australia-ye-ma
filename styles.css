@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Vazirmatn RD";
+  src: url("./assets/fonts/Vazirmatn-RD.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --ink: #12332f; --muted: #6f7976; --paper: #f7f6f2; --surface: #fff;
   --forest: #07554a; --forest-dark: #073c36; --forest-soft: #e2f1ec;
@@ -5,7 +13,7 @@
 }
 * { box-sizing: border-box; }
 html { background: #e7e7e3; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Noto Sans Arabic", Tahoma, "Geeza Pro", -apple-system, BlinkMacSystemFont, Arial, sans-serif; line-height: 1.5; text-rendering: optimizeLegibility; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Vazirmatn RD", "Noto Sans Arabic", Tahoma, "Geeza Pro", -apple-system, BlinkMacSystemFont, Arial, sans-serif; line-height: 1.55; text-rendering: optimizeLegibility; }
 button, input, select { font: inherit; }
 button, a { touch-action: manipulation; }
 button { color: inherit; -webkit-tap-highlight-color: transparent; }
@@ -168,7 +176,7 @@ main > * { animation: page-enter .24s ease-out both; }
 .location-chip span { color: #bde6db; font-size: 9px; }
 .location-chip b { font-size: 16px; margin-right: 4px; }
 .hero-copy { position: absolute; z-index: 2; inset-inline: 0; bottom: 32px; padding: 0 22px; }
-.hero h1 { margin: 0; max-width: 420px; color: white; font-size: clamp(29px, 7.5vw, 36px); line-height: 1.45; letter-spacing: -.7px; text-shadow: 0 3px 18px rgba(0,0,0,.3); }
+.hero h1 { margin: 0; max-width: 420px; color: white; font-size: clamp(29px, 7.5vw, 36px); line-height: 1.5; letter-spacing: 0; text-shadow: 0 3px 18px rgba(0,0,0,.3); }
 .hero-copy > p { margin: 7px 0 18px; color: rgba(255,255,255,.88); font-size: 13px; }
 .search { height: 64px; border-radius: 22px; background: rgba(255,255,255,.97); display: flex; align-items: center; padding: 0 18px; gap: 12px; color: var(--ink); box-shadow: 0 10px 28px rgba(0,0,0,.13); }
 .search span { font-size: 28px; line-height: 1; color: #24413e; transform: rotate(-12deg); }
@@ -179,7 +187,7 @@ main > * { animation: page-enter .24s ease-out both; }
 .section { margin-top: 27px; }
 .categories-section { margin-top: 0; padding-top: 23px; }
 .section-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 13px; }
-.section-head h2 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 18px; letter-spacing: -.3px; }
+.section-head h2 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 18px; letter-spacing: 0; }
 .section-head p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
 .heading-icon { color: var(--forest); font-size: 17px; }
 .text-button { border: 0; background: transparent; color: #52635f; font-weight: 700; cursor: pointer; padding: 8px 0; font-size: 11px; white-space: nowrap; }
@@ -310,19 +318,24 @@ main:not([data-view="home"]) > .search { margin: 8px 0 2px; box-shadow: none; bo
 .detail-section p, .trust-card p { font-size: 13px; }
 .telegram-button { font-size: 12px; }
 
-.visa-page-header p, .visa-category-card small, .visa-disclaimer p, .visa-resources a small,
-.visa-progress span small, .assistant-card small, .answer-history span, .results-intro p,
-.result-title b, .visa-facts b, .visa-empty p, .category-page-intro p,
-.basic-visa-card > div:first-child > b, .basic-visa-facts b { font-size: 11px; }
-.visa-guide-card p, .assistant-card p, .visa-result-card > p,
-.basic-visa-card > p { font-size: 12px; }
-.visa-guide-card h2, .result-title h2 { font-size: 15px; }
-.visa-guide-button, .visa-answer-list button { font-size: 14px; }
-.visa-category-card b, .visa-resources a b, .visa-result-card > a,
-.visa-empty > a, .basic-visa-card > a { font-size: 12px; }
-.results-intro b { font-size: 15px; }
-.relevance-ring small, .prototype-badge, .visa-facts small,
-.basic-visa-card > div:first-child > span, .basic-visa-facts small { font-size: 10px; }
+.visa-page-header p { font-size: 12px; }
+.visa-guide-card h2, .result-title h2 { font-size: 16px; }
+.visa-guide-card p, .assistant-card p, .results-intro p,
+.visa-empty p, .category-page-intro p { font-size: 13px; }
+.visa-guide-button, .visa-answer-list button { font-size: 15px; }
+.visa-category-card b { font-size: 14px; }
+.visa-category-card small, .visa-progress span small, .assistant-card small,
+.answer-history span, .result-title b, .visa-resources a small { font-size: 12px; }
+.visa-disclaimer p, .basic-visa-card > div:first-child > b { font-size: 12.5px; }
+.visa-resources a b, .visa-result-card > a,
+.visa-empty > a, .basic-visa-card > a { font-size: 13px; }
+.results-intro b { font-size: 16px; }
+.visa-result-card > p, .basic-visa-card > p { font-size: 14px; }
+.relevance-ring small, .prototype-badge,
+.basic-visa-card > div:first-child > span { font-size: 11px; }
+.visa-facts small, .basic-visa-facts small { font-size: 11px; }
+.visa-facts b, .basic-visa-facts b { font-size: 12px; }
+.visa-result-card, .basic-visa-card { line-height: 1.65; }
 
 @media (max-width: 370px) {
   .hero { height: 440px; }
