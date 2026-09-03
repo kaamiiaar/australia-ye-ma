@@ -75,7 +75,7 @@ const copy = {
 };
 
 const storedSaved = JSON.parse(localStorage.getItem('australia-ye-ma-saved') || localStorage.getItem('melbourne-e-ma-saved') || localStorage.getItem('persian-connect-saved') || '[]');
-const hasEntered = localStorage.getItem('australia-ye-ma-entered') === 'true';
+const hasEntered = sessionStorage.getItem('australia-ye-ma-entered') === 'true';
 const forceWelcome = new URLSearchParams(window.location.search).has('welcome');
 const forceVisa = new URLSearchParams(window.location.search).has('visa');
 const initialRoute = forceWelcome ? 'welcome' : forceVisa ? 'visas' : hasEntered ? 'home' : 'welcome';
@@ -307,7 +307,7 @@ function showToast(message) {
 }
 
 document.addEventListener('click', event => {
-  if (event.target.closest('[data-enter-app]')) { localStorage.setItem('australia-ye-ma-entered', 'true'); navigate('home', { smooth: false }); return; }
+  if (event.target.closest('[data-enter-app]')) { sessionStorage.setItem('australia-ye-ma-entered', 'true'); navigate('home', { smooth: false }); return; }
   if (event.target.closest('[data-sign-in]')) { showToast('ورود و ثبت‌نام در مرحله بعدی فعال می‌شود.'); return; }
   if (event.target.closest('[data-history-back]')) { if (state.route === 'visa-assistant' && state.visaStep > 1) { state.visaStep -= 1; state.visaAnswers.pop(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } else history.back(); return; }
   const route = event.target.closest('[data-route]');
