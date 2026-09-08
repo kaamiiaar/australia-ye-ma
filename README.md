@@ -38,9 +38,9 @@ The new Australian editorial summaries link to official sources and show their r
 
 - Home exchange overview; Iran remittance estimates in toman or IRR, both directions, amount presets, range comparisons and illustrative chart periods.
 - Cross-currency converter with search, currency swap and Persian/Arabic numeral input.
-- Australian news and events: compact cards, topic/search filters, detail/source metadata, related items, shareable links and persistent saves.
-- Photo/video scrolling with native playback controls, captions, keyboard-accessible next/previous controls, reduced-motion support and offscreen video pausing.
-- Guest access, Persian/English controls for the new screens, existing directory/community navigation and static relative assets.
+- Separate Australian news and event surfaces: compact event cards plus sourced news summaries, detail metadata and persistent saves.
+- Full-height vertical news scrolling with native video controls, reduced-motion support and offscreen video pausing.
+- Persian-only guest interface for the current prototype, with existing directory/community navigation and static relative assets.
 
 ## Validation and public build
 

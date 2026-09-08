@@ -8,8 +8,8 @@
 | Exchange overview | Iran/world entry cards, four selected currencies, information-only notice | Browser navigation; IRR explicitly shown in rials |
 | Iran remittance | Both directions, toman/IRR units, presets, clear, low/average/high estimate and quote, four chart periods | Unit tests and browser: 5,000 AUD → 940,000,000 toman / 9,400,000,000 IRR; inverse → 5,000 AUD |
 | World currencies | Ten currencies, pair selection, swap, amount conversion and search | Unit cross-rate and round-trip tests; browser 100 AUD → 66 USD, swapped 100 USD → 151.52 AUD; JPY search |
-| Australian news | Three concise independent summaries, topic/search filters, source/review metadata, detail, related cards and source policy | Browser filters, no-result state, keyboard entry, direct story reload and saved persistence |
-| Photo/video mode | Scroll snapping, next/previous, native video controls, captions, offscreen/hidden playback pause | Browser loaded and played the five-second demo (readyState 4, duration/currentTime 5), next-story scrolling |
+| Australian news | Four concise independent news summaries kept separate from event listings, with topic/search filters, source/review metadata, detail, related cards and source policy | Browser filters, direct story navigation and saved persistence inside profile |
+| News feed | Primary navigation opens a full-height vertical feed with scroll snapping, native video controls and offscreen/hidden playback pause | Phone-width browser check confirmed one-viewport slides, vertical scrolling, active navigation and no horizontal overflow |
 | Community connection | Existing Telegram community links, topic filters and unverified metadata | Browser student filter and navigation regression |
 
 ## Additional checks

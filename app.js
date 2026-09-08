@@ -13,10 +13,14 @@ let storedSaved=[]; try { const value=JSON.parse(readStorage('localStorage','aus
 const routeNames=['welcome','home','explore','communities','saved','submit','profile','detail','visas','visa-category','visa-assistant','visa-results','exchange','converter','remittance','exchange-sources','news','story','news-feed','news-sources'];
 const routeHash=location.hash.slice(1).split('/');
 const initialRoute=new URLSearchParams(location.search).has('welcome')?'welcome':new URLSearchParams(location.search).has('visa')?'visas':routeNames.includes(routeHash[0])?routeHash[0]:readStorage('sessionStorage','australia-ye-ma-entered','false')==='true'?'home':'welcome';
-const state={route:initialRoute,previousRoute:'home',language:readStorage('localStorage','australia-ye-ma-language','fa')==='en'?'en':'fa',filter:'all',communityFilter:'all',query:'',saved:new Set(storedSaved),selectedItem:initialRoute==='detail'?(Number(routeHash[1])||1):1,visaStep:1,visaAnswers:[],selectedVisaCategory:'all',currencyFrom:'AUD',currencyTo:'USD',currencyAmount:'1',currencyQuery:'',remitAmount:'5000',remitDirection:'out',remitUnit:'toman',trend:'7D',newsQuery:'',newsFilter:'all',storyId:Number(routeHash[1])||101};
+const state={route:initialRoute,previousRoute:'home',language:'fa',filter:'all',communityFilter:'all',query:'',saved:new Set(storedSaved),selectedItem:initialRoute==='detail'?(Number(routeHash[1])||1):1,visaStep:1,visaAnswers:[],selectedVisaCategory:'all',currencyFrom:'AUD',currencyTo:'USD',currencyAmount:'1',currencyQuery:'',remitAmount:'5000',remitDirection:'out',remitUnit:'toman',trend:'7D',newsQuery:'',newsFilter:'all',storyId:Number(routeHash[1])||101,cityPickerOpen:false};
 const app = document.querySelector('#app');
 const t = key => copy[state.language][key];
 const local = item => item[state.language] || item.fa || item.en;
+
+function brandLogo(className='brand-mark') {
+  return `<span class="${className}" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="opera-line" d="M8 41c6-14 13-20 21-22-2 8-1 15 3 22M31 41c4-11 10-16 18-18-1 7 1 13 7 18M8 42h48"/><text x="32" y="55">ما</text></svg><span class="australia-flag">🇦🇺</span></span>`;
+}
 
 function listingCard(item) {
   if(editorial.some(n=>n.id===item.id)) return newsCard(editorial.find(n=>n.id===item.id));
@@ -25,7 +29,7 @@ function listingCard(item) {
   return `<article class="listing-card ${item.image ? 'with-photo' : ''}" aria-label="${escapeHTML(local(item))}">
     ${item.image ? `<img class="listing-photo" src="${item.image}" alt="${item.imageAlt || ''}" loading="lazy" />` : `<div class="listing-logo">${item.logo}</div>`}
     <div class="listing-copy"><h3><button class="listing-title-button" data-listing="${item.id}">${local(item)}</button></h3><p>${place}</p><div class="meta"><span class="${item.prototype ? 'prototype-label' : item.verified ? 'verified' : ''}">${item.prototype ? words('نمونه نمایشی','Prototype example') : item.verified ? '✓ ' + t('verified') : t('unverified')}</span><span>${item.sourceName || t('source')}</span></div></div>
-    <button class="save ${saved ? 'saved' : ''}" data-save="${item.id}" aria-label="Save">${saved ? '♥' : '♡'}</button>
+    <button class="save ${saved ? 'saved' : ''}" data-save="${item.id}" aria-label="ذخیره">${saved ? '♥' : '♡'}</button>
   </article>`;
 }
 
@@ -67,28 +71,35 @@ function home() {
   return `<section class="hero">
     <div class="hero-shade"></div>
     <header class="hero-header">
-      <button class="brand" data-route="home" aria-label="خانه"><span class="brand-mark" aria-hidden="true">ما</span><span><b>Australia-ye Ma</b><small>استرالیای ما</small></span></button>
-      <span class="location-chip"><span>●</span> ${words('ملبورن','Melbourne')}</span><button class="language-button" data-language>${words('EN','فا')}</button>
+      <button class="brand" data-route="home" aria-label="خانه">${brandLogo()}<span><b>استرالیای ما</b><small>ملبورنِ ما</small></span></button>
+      <button class="location-chip" data-city-picker aria-haspopup="dialog" aria-expanded="${state.cityPickerOpen}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><b>ملبورن</b><span>⌄</span></button>
     </header>
     <div class="hero-copy"><h1>${t('hero')}</h1><p>${t('heroSub')}</p>
       <label class="search"><span>⌕</span><input id="homeSearch" type="search" placeholder="${t('search')}" value="${escapeHTML(state.query)}" aria-label="${t('explore')}" /></label>
     </div>
   </section>
-  <div class="home-sheet">${homeExchange()}${homeNews()}
-    <section class="section categories-section"><div class="section-head"><div><h2><span class="heading-icon">▣</span>${t('categories')}</h2></div><button class="text-button" data-route="explore">${words('همه دسته‌بندی‌ها ‹','All categories ›')}</button></div>${categoryGrid()}</section>
+  <div class="home-sheet">
+    <section class="section categories-section"><div class="section-head"><div><h2>${t('categories')}</h2></div><button class="text-button" data-route="explore">همه دسته‌بندی‌ها ‹</button></div>${categoryGrid()}</section>
+    ${homeNews()}
     <section class="section"><div class="section-head"><div><h2><span class="heading-icon">★</span>${t('featured')}</h2></div><button class="text-button" data-category="events">${words('مشاهده همه ‹','See all ›')}</button></div><div class="horizontal-list">
       ${[20,21,23].map(id=>{const n=listings.find(n=>n.id===id);return `<article class="feature-card" data-listing="${id}" tabindex="0" role="button"><img class="feature-photo" src="${n.image}" alt=""/><span class="pill">${words('رویداد','Event')}</span><div><h3>${local(n)}</h3><p>${words(n.placeFa,n.placeEn)}</p></div></article>`;}).join('')}
     </div></section>
-    <section class="section nearby-section"><div class="section-head"><div><h2>${t('nearby')}</h2><p>${words('مرکز ملبورن و اطراف','Central Melbourne and surrounds')}</p></div></div><div class="listing-stack">${[1, 22].map(id => listings.find(item => item.id === id)).map(listingCard).join('')}</div></section><p class="prototype-note">${words('رویدادها و کسب‌وکارها از منابع رسمی یا وب‌سایت خود مجموعه گردآوری شده‌اند و هنوز تأیید همکاری نشده‌اند. موارد دارای برچسب «نمونه نمایشی» واقعی نیستند.','Events and businesses link to official or owner sources; no partnership is implied. Items labelled prototype examples are fictional.')}</p>
-  </div>`;
+    ${homeExchange()}
+    <section class="section nearby-section"><div class="section-head"><div><h2>کسب‌وکارهای ایرانی نزدیک تو</h2><p>ملبورن و اطراف</p></div></div><p class="business-priority">کسب‌وکارهای ایرانی و فارسی‌زبان اولویت دارند؛ گزینه‌های مرتبط دیگر هم با منبع روشن نمایش داده می‌شوند.</p><div class="listing-stack">${[1,2,3].map(id => listings.find(item => item.id === id)).map(listingCard).join('')}</div></section><p class="prototype-note">رویدادها و کسب‌وکارها از منابع رسمی یا وب‌سایت خود مجموعه گردآوری شده‌اند و هنوز تأیید همکاری نشده‌اند. موارد دارای برچسب «نمونه نمایشی» واقعی نیستند.</p>
+  </div>${cityPicker()}`;
+}
+
+function cityPicker() {
+  if (!state.cityPickerOpen) return '';
+  return `<div class="city-backdrop" data-city-close><section class="city-sheet" role="dialog" aria-modal="true" aria-labelledby="cityTitle"><span class="sheet-handle" aria-hidden="true"></span><div class="city-sheet-head"><div><h2 id="cityTitle">انتخاب شهر</h2><p>فعلاً ملبورن فعال است</p></div><button data-city-close aria-label="بستن">×</button></div><button class="city-option active" data-city-close><span><b>ملبورن</b><small>شهر فعال</small></span><strong>✓</strong></button><button class="city-option" disabled><span><b>سیدنی</b><small>به‌زودی</small></span><em>به‌زودی</em></button><button class="city-option" disabled><span><b>بریزبن</b><small>به‌زودی</small></span><em>به‌زودی</em></button></section></div>`;
 }
 
 function welcome() {
   return `<section class="welcome-screen">
     <div class="welcome-shade"></div>
     <div class="welcome-brand" aria-label="استرالیای ما">
-      <span class="welcome-mark">ما</span>
-      <h1>Australia-ye Ma</h1>
+      ${brandLogo('welcome-mark')}
+      <h1>استرالیای ما</h1>
       <p>${words('استرالیای ما، خانه‌ی فارسی‌زبان‌های ملبورن','A local home for Persian speakers in Melbourne')}</p>
     </div>
     <div class="welcome-sheet">
@@ -196,7 +207,7 @@ function detail() {
   const primaryAction = item.sourceUrl ? `<a class="primary-button detail-link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${words('مشاهده منبع رسمی ↗','View official source ↗')}</a>` : `<button class="primary-button" data-demo>جزئیات بیشتر</button>`;
   return `<button class="back-button" data-route="${state.previousRoute}">‹ ${isFa ? 'بازگشت' : 'Back'}</button>
     ${item.image ? `<img class="detail-cover" src="${item.image}" alt="${item.imageAlt || ''}" />` : ''}
-    <section class="detail-hero"><div class="detail-logo">${item.logo}</div><div class="detail-title"><span class="status ${item.prototype ? 'prototype-label' : item.verified ? 'verified' : ''}">${statusText}</span><h1>${local(item)}</h1><p>${place}</p></div><button class="save ${state.saved.has(item.id) ? 'saved' : ''}" data-save="${item.id}" aria-label="Save">${state.saved.has(item.id) ? '♥' : '♡'}</button></section>
+    <section class="detail-hero"><div class="detail-logo">${item.logo}</div><div class="detail-title"><span class="status ${item.prototype ? 'prototype-label' : item.verified ? 'verified' : ''}">${statusText}</span><h1>${local(item)}</h1><p>${place}</p></div><button class="save ${state.saved.has(item.id) ? 'saved' : ''}" data-save="${item.id}" aria-label="ذخیره">${state.saved.has(item.id) ? '♥' : '♡'}</button></section>
     <div class="detail-actions">${primaryAction}<button class="secondary-button" data-save="${item.id}">${state.saved.has(item.id) ? (isFa ? 'ذخیره شد' : 'Saved') : (isFa ? 'ذخیره کن' : 'Save')}</button></div>
     <section class="detail-section"><h2>${isFa ? 'درباره' : 'About'}</h2><p>${isFa ? item.descriptionFa || descriptions[item.type] : item.descriptionEn || descriptions[item.type] || item.placeEn}</p></section>
     <section class="trust-card"><div class="trust-icon">${item.prototype ? '!' : item.verified ? '✓' : 'i'}</div><div><h2>${item.prototype ? words('این مورد فقط برای پیش‌نمایش است','Prototype example only') : item.verified ? words('هویت این صفحه بررسی شده','Identity checked') : words('این صفحه هنوز تأیید نشده','This record is unverified')}</h2><p>${item.prototype ? words('این مورد واقعی نیست و برای کامل دیدن رابط کاربری ساخته شده است.','This is an invented example for interface testing.') : item.verified ? words('اطلاعات اصلی با صاحب یا برگزارکننده تطبیق داده شده است.','Details were checked with the owner or organiser.') : words('اطلاعات از منبع رسمی برگزارکننده یا وب‌سایت خود مجموعه خلاصه شده، اما همکاری یا مالکیت تأیید نشده است.','Details were summarised from the organiser or owner’s site. Ownership and partnership are not verified.')}</p><small>${words('آخرین بررسی:','Last checked:')} ${item.checked || '۳ سپتامبر ۲۰۲۶'} · ${item.sourceName || 'نمونه نمایشی'}</small></div></section>
@@ -208,7 +219,10 @@ function submit() {
 }
 
 function profile() {
-  return `<div class="page-title"><h1>${t('profile')}</h1><p>${t('profileSub')}</p></div><div class="profile-card"><div class="avatar" style="display:grid;place-items:center;margin:auto;width:64px;height:64px;font-size:24px">ک</div><h2>${state.language === 'fa' ? 'کاربر مهمان' : 'Guest user'}</h2><p style="color:var(--muted);font-size:13px">${state.language === 'fa' ? 'برای ذخیره دائمی و ثبت محتوا بعداً وارد شو.' : 'Sign-in will later enable persistent saves and submissions.'}</p><button class="primary-button" data-demo>${state.language === 'fa' ? 'ورود یا ساخت حساب' : 'Sign in or create account'}</button></div><div class="stat-row"><div class="stat"><b>${state.saved.size}</b><small>${t('saved')}</small></div><div class="stat"><b>0</b><small>${state.language === 'fa' ? 'ثبت‌ها' : 'Submissions'}</small></div><div class="stat"><b>Mel</b><small>${state.language === 'fa' ? 'شهر' : 'City'}</small></div></div>`;
+  const items = listings.filter(item => state.saved.has(item.id));
+  const stories = editorial.filter(item => state.saved.has(item.id));
+  const savedContent = items.length || stories.length ? `<div class="listing-stack">${items.map(listingCard).join('')}${stories.map(newsCard).join('')}</div>` : `<div class="profile-saved-empty"><span>♡</span><p>هنوز چیزی ذخیره نکردی. قلب کنار هر مورد را بزن تا اینجا نگهش داری.</p><button class="secondary-button" data-route="explore">شروع جستجو</button></div>`;
+  return `<div class="page-title"><h1>${t('profile')}</h1><p>${t('profileSub')}</p></div><div class="profile-card"><div class="avatar" style="display:grid;place-items:center;margin:auto;width:64px;height:64px;font-size:24px">ک</div><h2>کاربر مهمان</h2><p style="color:var(--muted);font-size:13px">برای همگام‌سازی ذخیره‌ها و ثبت محتوا بعداً وارد شو.</p><button class="primary-button" data-demo>ورود یا ساخت حساب</button></div><div class="stat-row"><div class="stat"><b>${state.saved.size}</b><small>ذخیره‌ها</small></div><div class="stat"><b>۰</b><small>ثبت‌ها</small></div><div class="stat"><b>ملبورن</b><small>شهر</small></div></div><section class="profile-saved"><div class="section-head"><h2>ذخیره‌های من</h2><small>${number(state.saved.size,0)} مورد</small></div>${savedContent}</section>`;
 }
 
 function render() {
@@ -216,12 +230,11 @@ function render() {
   app.dataset.view = state.route;
   document.querySelector('.app-shell').classList.toggle('welcome-mode', state.route === 'welcome');
   document.querySelector('.app-shell').classList.toggle('focus-mode', state.route === 'visa-category' || state.route === 'visa-assistant' || state.route === 'visa-results');
+  document.querySelector('.app-shell').classList.toggle('feed-mode', state.route === 'news-feed');
   app.innerHTML = (views[state.route] || home)();
-  document.querySelectorAll('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.route === state.route || (state.route === 'communities' && button.dataset.route === 'explore') || (state.route === 'visas' && button.dataset.route === 'home')));
-  document.querySelector('.bottom-nav').setAttribute('aria-label',words('ناوبری اصلی','Main navigation'));
-  document.documentElement.lang = state.language;
-  document.documentElement.dir = state.language==='fa'?'rtl':'ltr';
-  document.querySelectorAll('.nav-item').forEach(b=>{b.querySelector('small').textContent=({home:words('خانه','Home'),explore:t('explore'),submit:words('ثبت آگهی','Post'),saved:t('saved'),profile:words('پروفایل','Profile')})[b.dataset.route];});
+  document.querySelectorAll('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.route === state.route || (['news','story','news-sources'].includes(state.route) && button.dataset.route === 'news-feed') || (state.route === 'communities' && button.dataset.route === 'explore') || (state.route === 'visas' && button.dataset.route === 'home')));
+  document.documentElement.lang = 'fa';
+  document.documentElement.dir = 'rtl';
   app.querySelectorAll('video').forEach(video=>{video.addEventListener('play',()=>app.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();}));});
   if ('IntersectionObserver' in window) { render.mediaObserver?.disconnect(); render.mediaObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)e.target.pause();}),{threshold:0.3}); app.querySelectorAll('video').forEach(v=>render.mediaObserver.observe(v)); }
 
@@ -245,6 +258,8 @@ function showToast(message) {
 }
 
 document.addEventListener('click', event => {
+  if (event.target.closest('[data-city-picker]')) { state.cityPickerOpen = true; render(); return; }
+  if (event.target === event.target.closest('.city-backdrop') || event.target.closest('.city-sheet [data-city-close]')) { state.cityPickerOpen = false; render(); return; }
   if (event.target.closest('[data-enter-app]')) { writeStorage('sessionStorage','australia-ye-ma-entered', 'true'); navigate('home', { smooth: false }); return; }
   if (event.target.closest('[data-sign-in]')) { showToast('ورود و ثبت‌نام در مرحله بعدی فعال می‌شود.'); return; }
   if (event.target.closest('[data-history-back]')) { if (state.route === 'visa-assistant' && state.visaStep > 1) { state.visaStep -= 1; state.visaAnswers.pop(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } else history.back(); return; }
@@ -293,7 +308,6 @@ window.addEventListener('popstate', event => {
 // New feature controls are independent of legacy listing actions.
 document.addEventListener('click',event=>{
  const button=event.target.closest('button'); if(!button)return;
- if(button.hasAttribute('data-language')) {state.language=state.language==='fa'?'en':'fa';writeStorage('localStorage','australia-ye-ma-language',state.language);render();}
  if(button.dataset.currency){state.currencyTo=button.dataset.currency;navigate('converter');}
  if(button.hasAttribute('data-swap-currency')){[state.currencyFrom,state.currencyTo]=[state.currencyTo,state.currencyFrom];render();}
  if(button.dataset.remitDirection){state.remitDirection=button.dataset.remitDirection;render();}

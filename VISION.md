@@ -109,4 +109,4 @@ Never sell verification, hide basic correction tools, or allow payment to erase 
 
 ## September 2026 prototype extension
 
-The approved prototype now includes Australian news and events, source-labelled compact story cards and an optional photo/video browsing view. General sports and unrelated world news are outside the editorial scope. Exchange screens are informational prototypes with clearly labelled sample rates and a strict toman/IRR distinction; they do not transfer money. These additions do not introduce a backend or a claim of live/comprehensive coverage.
+The approved prototype now keeps Australian news and events as separate surfaces. News opens as a full-height, vertically scrollable feed from the primary navigation; general sports and unrelated world news remain outside the editorial scope. Saved items live within profile, and the current test interface is Persian-only. Exchange screens are informational prototypes with clearly labelled sample rates and a strict toman/IRR distinction; they do not transfer money. These additions do not introduce a backend or a claim of live/comprehensive coverage.
