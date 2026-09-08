@@ -2,7 +2,7 @@
 
 ## Product context
 
-Australia-ye Ma (استرالیای ما) is a bilingual, trust-focused local discovery product for Persian-speaking people across Australia. Melbourne is the first launch city and appears in-product as Melbourne-e Ma (ملبورنِ ما). Read `VISION.md`, `TECHNICAL_PLAN.md`, and `.private/ideas-and-bugs.md` (when available locally) before making product or architecture changes. Treat the private ideas-and-bugs file as the shared lightweight backlog: add discoveries, unresolved product ideas, and reproducible bugs there as work progresses.
+Australia-ye Ma (استرالیای ما) is a bilingual, trust-focused local discovery product for Persian-speaking people across Australia. Melbourne is the first launch city and appears in-product as Melbourne-e Ma (ملبورنِ ما). Read `README.md`, `VISION.md`, and `.private/ideas-and-bugs.md` (when available locally) before making product or architecture changes. Treat the private ideas-and-bugs file as the shared lightweight backlog: add discoveries, unresolved product ideas, and reproducible bugs there as work progresses.
 
 Private Telegram community research lives under `.private/telegram/` when available locally. Keep observed facts separate from hypotheses and do not mark a source as reviewed without recording the review date. Never move invite links, private research, copied community material, or internal notes into tracked files.
 
@@ -20,6 +20,8 @@ The current app is a dependency-free mobile web prototype. Optimise it for quick
 - Never represent sponsorship or migration eligibility as guaranteed.
 - Do not collect or expose unnecessary personal information.
 - Do not scrape private groups or bulk-scrape Telegram channel histories.
+- Treat Telegram and third-party directories as lead-discovery sources only. During bootstrap, any public-source check must be brief, manual, and no more than once daily; never present it as comprehensive monitoring.
+- Independently verify foundational claims and business details against authoritative or owner-controlled web sources before publication; do not copy community messages or third-party editorial text.
 - Sponsored results must be visibly labelled.
 
 ## Engineering rules

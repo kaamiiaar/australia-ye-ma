@@ -1,0 +1,5 @@
+const test=require('node:test');const assert=require('node:assert/strict');const e=require('../exchange.js');
+test('currency conversions use cross rates and round trip',()=>{assert.equal(e.convert(100,'AUD','USD'),66);assert.ok(Math.abs(e.convert(66,'USD','AUD')-100)<1e-10);assert.equal(e.convert(1,'AUD','IRR'),1880000);});
+test('Persian and Arabic digits, separators, zero and invalid amounts',()=>{assert.equal(e.amount('۵٬۰۰۰٫۵'),5000.5);assert.equal(e.amount('١٠٠'),100);assert.equal(e.amount('0'),0);for(const n of ['', '-1','NaN','Infinity','1e99','<script>', '1.2.3'])assert.equal(e.amount(n),null);});
+test('toman and rial never share the same scale',()=>{assert.equal(e.remittance(5000,'out','toman').average,940000000);assert.equal(e.remittance(5000,'out','IRR').average,9400000000);assert.equal(e.remittance(940000000,'in','toman').average,5000);assert.equal(e.remittance(9400000000,'in','IRR').average,5000);});
+test('reverse estimates keep the low and high range ordered',()=>{for(const direction of ['out','in']){const r=e.remittance(5000,direction);assert.ok(r.low<r.average&&r.average<r.high);}});

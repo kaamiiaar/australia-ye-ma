@@ -22,6 +22,12 @@ The initial market is Melbourne. The model should later expand city by city acro
 
 The app should make a useful local answer reachable in under a minute. It should feel welcoming and community-led without becoming an unsearchable social feed.
 
+## Why Australia-ye Ma alongside Telegram
+
+Telegram is where community conversation happens. Australia-ye Ma is where that fragmented knowledge becomes searchable, current, and useful.
+
+The product brings together cities and categories with structured search, maps, comparisons, saved items, and alerts. It removes expired or duplicate listings, separates verified guidance from community opinion, personalises discovery, and still routes people to the relevant Telegram communities when conversation is the better experience.
+
 ## Product pillars
 
 1. **Discover** — businesses, services, events, activities, guides, and places.
@@ -35,12 +41,12 @@ The app should make a useful local answer reachable in under a minute. It should
 The first version should not attempt to launch every marketplace at once. It should become genuinely useful in Melbourne through:
 
 - a high-quality Persian-friendly business directory;
-- events and community groups;
-- practical newcomer and student guides;
+- practical, reviewed newcomer and student knowledge;
+- community discovery with links back to active Telegram groups;
 - lightweight submissions from users and organisers;
 - visible verification and last-updated information.
 
-Jobs and second-hand listings can appear as prototype categories, then become transactional features after the discovery product has recurring users.
+Fresh jobs, rentals, events, and second-hand listings can appear as prototype categories, but should not become a core operational promise until users, businesses, and organisers supply them directly. During bootstrap, a small editorial check of major public sources may occasionally identify useful leads; it is not a comprehensive or real-time feed.
 
 ## Trust and listing policy
 
@@ -57,7 +63,7 @@ Every imported listing should include:
 
 Verified status should require the owner or organiser to prove control of a business domain, phone number, social account, or other reliable channel. Sponsored placement must be visibly labelled and must not silently affect organic ranking.
 
-Do not scrape private or closed communities. Do not build the product around mass scraping of Telegram channels. Prefer organiser submissions, partnerships, permitted APIs/feeds, public business websites, and carefully reviewed manual imports. Users should explicitly consent before content submitted through a Telegram bot is retained and published.
+Do not scrape private or closed communities. Do not build the product around mass or continuous scraping of Telegram channels. Telegram and third-party directories such as `auiran.com` may help discover topics, communities, or public business leads, but published facts should be independently checked against an authoritative or owner-controlled web source. Do not copy community messages or third-party editorial text. Prefer organiser submissions, permitted APIs/feeds, public business websites, and carefully reviewed manual imports. Users should explicitly consent before content submitted through a Telegram bot is retained and published.
 
 ## Experience principles
 
@@ -100,3 +106,7 @@ Never sell verification, hide basic correction tools, or allow payment to erase 
 - Native iOS app as the primary polished consumer experience once the core loops are proven.
 - Android app alongside iOS when usage justifies native distribution, ideally from a shared cross-platform codebase.
 - A small web admin console for moderation, imports, verification, and content freshness.
+
+## September 2026 prototype extension
+
+The approved prototype now includes Australian news and events, source-labelled compact story cards and an optional photo/video browsing view. General sports and unrelated world news are outside the editorial scope. Exchange screens are informational prototypes with clearly labelled sample rates and a strict toman/IRR distinction; they do not transfer money. These additions do not introduce a backend or a claim of live/comprehensive coverage.
