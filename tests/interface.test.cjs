@@ -17,6 +17,7 @@ test('primary navigation links to the news feed and keeps saves in profile', () 
 test('Persian-only interface has no language switch', () => {
   assert.doesNotMatch(html + app + features, /data-language/);
   assert.match(app, /language:'fa'/);
+  assert.match(html, /<title>استرالیای ما<\/title>/);
 });
 
 test('news filters do not include events', () => {
